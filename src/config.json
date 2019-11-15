@@ -9,7 +9,8 @@
 		"tr": "Turkish",
 		"pt-br": "Brazilian Portuguese",
 		"de": "German",
-		"it": "Italian"
+		"it": "Italian",
+		"ru": "Russian"
 	},
 	"repo": "preactjs/preact",
 	"docsearch": {
@@ -28,7 +29,8 @@
 		{
 			"name": {
 				"en": "Guide",
-				"de": "Anleitung"
+				"de": "Anleitung",
+				"ru": "Руководство"
 			},
 			"content": "guide",
 			"path": "/guide/v10/getting-started"
@@ -36,7 +38,8 @@
 		{
 			"name": {
 				"en": "About",
-				"de": "Mehr"
+				"de": "Mehr",
+				"ru": "О проекте"
 			},
 			"content": "about",
 			"routes": [
@@ -44,35 +47,40 @@
 					"path": "/about/we-are-using",
 					"name": {
 						"en": "Companies using Preact",
-						"de": "Firmen die Preact benutzen"
+						"de": "Firmen die Preact benutzen",
+						"ru": "Компании, использующие Preact"
 					}
 				},
 				{
 					"path": "/about/libraries-addons",
 					"name": {
 						"en": "Libraries & Add-ons",
-						"de": "Bibliotheken & Erweiterungen"
+						"de": "Bibliotheken & Erweiterungen",
+						"ru": "Библиотеки и дополнения"
 					}
 				},
 				{
 					"path": "/about/demos-examples",
 					"name": {
 						"en": "Demos & Examples",
-						"de": "Beispiel-Projekte"
+						"de": "Beispiel-Projekte",
+						"ru": "Демо и примеры"
 					}
 				},
 				{
 					"path": "/about/project-goals",
 					"name": {
 						"en": "Project Goals",
-						"de": "Projekt-Ziele"
+						"de": "Projekt-Ziele",
+						"ru": "Цели проекта"
 					}
 				},
 				{
 					"path": "/about/browser-support",
 					"name": {
 						"en": "Browser Support",
-						"de": "Browserunterstützung"
+						"de": "Browserunterstützung",
+						"ru": "Поддержка в браузерах"
 					}
 				}
 			]
@@ -86,13 +94,15 @@
 				{
 					"path": "/cli",
 					"name": {
-						"en": "Introduction"
+						"en": "Introduction",
+						"ru": "Введение"
 					}
 				},
 				{
 					"path": "/cli/getting-started",
 					"name": {
-						"en": "Getting started"
+						"en": "Getting started",
+						"ru": "Начало работы"
 					}
 				},
 				{
@@ -104,7 +114,8 @@
 				{
 					"path": "/cli/pre-rendering",
 					"name": {
-						"en": "Pre-rendering"
+						"en": "Pre-rendering",
+						"ru": "Пререндер"
 					}
 				}
 			]
@@ -120,194 +131,251 @@
 			"path": "/guide/v8/getting-started",
 			"name": {
 				"en": "Getting Started",
-				"de": "Los geht's"
+				"de": "Los geht's",
+				"ru": "Начало работы"
 			}
 		},
 		{
 			"path": "/guide/v8/differences-to-react",
 			"name": {
 				"en": "Differences to React",
-				"de": "Unterschiede zu React"
+				"de": "Unterschiede zu React",
+				"ru": "Отличия от React"
 			}
 		},
 		{
 			"path": "/guide/v8/switching-to-preact",
 			"name": {
 				"en": "Switching to Preact",
-				"de": "Wechsel zu Preact"
+				"de": "Wechsel zu Preact",
+				"ru": "Переход на Preact"
 			}
 		},
 		{
 			"path": "/guide/v8/types-of-components",
 			"name": {
 				"en": "Types of Components",
-				"de": "Komponenten-Typen"
+				"de": "Komponenten-Typen",
+				"ru": "Виды компонентов"
 			}
 		},
 		{
 			"path": "/guide/v8/api-reference",
 			"name": {
 				"en": "API Reference",
-				"de": "API Referenz"
+				"de": "API Referenz",
+				"ru": "Справочник API"
 			}
 		},
 		{
 			"path": "/guide/v8/forms",
 			"name": {
 				"en": "Forms",
-				"de": "Formulare"
+				"de": "Formulare",
+				"ru": "Формы"
 			}
 		},
 		{
 			"path": "/guide/v8/linked-state",
-			"name": "Linked State"
+			"name": {
+				"en": "Linked State",
+				"ru": "Связанное состояние"
+			}
 		},
 		{
 			"path": "/guide/v8/external-dom-mutations",
 			"name": {
 				"en": "External DOM Mutations",
-				"de": "Externe DOM Mutationen"
+				"de": "Externe DOM Mutationen",
+				"ru": "Внешие изменения DOM"
 			}
 		},
 		{
 			"path": "/guide/v8/extending-component",
 			"name": {
 				"en": "Extending Component",
-				"de": "Komponente Erweitern"
+				"de": "Komponente Erweitern",
+				"ru": "Наследование компонентов"
 			}
 		},
 		{
 			"path": "/guide/v8/unit-testing-with-enzyme",
 			"name": {
 				"en": "Unit Testing with Enzyme",
-				"de": "Unit-Tests mit Enzyme"
+				"de": "Unit-Tests mit Enzyme",
+				"ru": "Юнит-тесты с помощью Enzyme"
 			}
 		},
 		{
 			"path": "/guide/v8/progressive-web-apps",
-			"name": "Progressive Web Apps"
+			"name": {
+				"en": "Progressive Web Apps",
+				"ru": "Прогрессивные веб-приложения"
+			}
 		},
 
 		{
 			"path": "/guide/v10/getting-started",
 			"name": {
 				"en": "Getting Started",
-				"de": "Los geht's"
+				"de": "Los geht's",
+				"ru": "Начало работы"
 			}
 		},
 		{
 			"path": "/guide/v10/whats-new",
 			"name": {
-				"en": "What's new?"
+				"en": "What's new?",
+				"ru": "Что нового?"
 			}
 		},
 		{
 			"path": "/guide/v10/upgrade-guide",
 			"name": {
 				"en": "Upgrading from 8.x",
-				"de": "Migration von 8.x"
+				"de": "Migration von 8.x",
+				"ru": "Переход с 8.x"
 			}
 		},
 		{
 			"path": "/guide/v10/tutorial",
-			"name": "Tutorial"
+			"name": {
+				"en": "Tutorial",
+				"ru": "Учебник"
+			}
 		},
 		{
 			"path": "/guide/v10/differences-to-react",
 			"name": {
 				"en": "Differences to React",
-				"de": "Unterschiede zu React"
+				"de": "Unterschiede zu React",
+				"ru": "Отличия от React"
 			}
 		},
 		{
 			"path": "/guide/v10/switching-to-preact",
 			"name": {
 				"en": "Switching to Preact",
-				"de": "Wechsel zu Preact"
+				"de": "Wechsel zu Preact",
+				"ru": "Переход на Preact"
 			}
 		},
 		{
 			"path": "/guide/v10/components",
 			"name": {
 				"en": "Components",
-				"de": "Komponenten"
+				"de": "Komponenten",
+				"ru": "Компоненты"
 			}
 		},
 		{
 			"path": "/guide/v10/hooks",
-			"name": "Hooks"
+			"name": {
+				"en": "Hooks",
+				"ru": "Хуки"
+			}
 		},
 		{
 			"path": "/guide/v10/api-reference",
 			"name": {
 				"en": "API Reference",
-				"de": "API Referenz"
+				"de": "API Referenz",
+				"ru": "Справочник API"
 			}
 		},
 		{
 			"path": "/guide/v10/forms",
 			"name": {
 				"en": "Forms",
-				"de": "Formulare"
+				"de": "Formulare",
+				"ru": "Формы"
 			}
 		},
 		{
 			"path": "/guide/v10/linked-state",
-			"name": "Linked State"
+			"name": {
+				"en": "Linked State",
+				"ru": "Связанное состояние"
+			}
 		},
 		{
 			"path": "/guide/v10/refs",
 			"name": {
 				"en": "References",
-				"de": "Referenzen"
+				"de": "Referenzen",
+				"ru": "Ссылки"
 			}
 		},
 		{
 			"path": "/guide/v10/context",
 			"name": {
 				"en": "Context",
-				"de": "Kontext"
+				"de": "Kontext",
+				"ru": "Контекст"
 			}
 		},
 		{
 			"path": "/guide/v10/external-dom-mutations",
 			"name": {
 				"en": "External DOM Mutations",
-				"de": "Externe DOM Mutationen"
+				"de": "Externe DOM Mutationen",
+				"ru": "Внешие изменения DOM"
 			}
 		},
 		{
 			"path": "/guide/v10/debugging",
 			"name": {
 				"en": "Debugging Tools",
-				"de": "Entwickler-Tools"
+				"de": "Entwickler-Tools",
+				"en": "Инструменты отладки"
 			}
 		},
 		{
 			"path": "/guide/v10/server-side-rendering",
-			"name": "Server-Side Rendering"
+			"name": {
+				"en": "Server-Side Rendering",
+				"ru": "Серверный рендеринг"
+			}
 		},
 		{
 			"path": "/guide/v10/extending-component",
 			"name": {
 				"en": "Extending Component",
-				"de": "Komponente Erweitern"
+				"de": "Komponente Erweitern",
+				"ru": "Наследование компонентов"
 			}
 		},
 		{
 			"path": "/guide/v10/unit-testing-with-enzyme",
 			"name": {
 				"en": "Unit Testing with Enzyme",
-				"de": "Unit-Tests mit Enzyme"
+				"de": "Unit-Tests mit Enzyme",
+				"ru": "Юнит-тесты с помощью Enzyme"
 			}
 		},
 		{
 			"path": "/guide/v10/web-components",
-			"name": "Web Components"
+			"name": {
+				"en": "Web Components",
+				"ru": "Веб компоненты"
+			}
 		},
 		{
 			"path": "/guide/v10/progressive-web-apps",
-			"name": "Progressive Web Apps"
+			"name": {
+				"en": "Progressive Web Apps",
+				"ru": "Прогрессивные веб-приложения"
+			}
 		}
-	]
+	],
+	"sidebar": {
+		"version": {
+			"en": "Version",
+			"ru": "Версия"
+		},
+		"current": {
+			"en": "current",
+			"ru": "текущая"
+		}
+	}
 }

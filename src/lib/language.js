@@ -15,3 +15,7 @@ export function getDefaultLanguage(available = {}) {
 		}
 	}
 }
+
+export function getTranslate(target, lang) {
+	return typeof target === 'object' ? target[lang] || target.en : target;
+}
