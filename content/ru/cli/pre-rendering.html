@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Pre-rendering Pages</title>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+        
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        
+        
+    </head>
+    <body class="vscode-light">
+        <hr>
+<h2 id="name-%d0%9f%d1%80%d0%b5%d1%80%d0%b5%d0%bd%d0%b4%d0%b5%d1%80%d0%b8%d0%bd%d0%b3permalink-clipre-renderingdescription-%d0%90%d0%b2%d1%82%d0%be%d0%bc%d0%b0%d1%82%d0%b8%d1%87%d0%b5%d1%81%d0%ba%d0%b8%d0%b9-%d0%bf%d1%80%d0%b5%d1%80%d0%b5%d0%bd%d0%b4%d0%b5%d1%80-%d1%81%d1%82%d1%80%d0%b0%d0%bd%d0%b8%d1%86%d1%8b-%d1%81-%d0%bf%d0%be%d0%bc%d0%be%d1%89%d1%8c%d1%8e-preact-cli">name: 'Пререндеринг'
+permalink: '/cli/pre-rendering'
+description: 'Автоматический пререндер страницы с помощью Preact CLI.'</h2>
+<h1 id="pre-rendering-pages">Pre-rendering Pages</h1>
+<p>Preact CLI automatically &quot;pre-renders&quot; your pages to static HTML so they load fast.</p>
+<p>When building for production, Preact CLI renders your components and saves the result as static HTML. This means visitors to your site immediately see the pre-rendered HTML version, even before any JavaScript has loaded.</p>
+<blockquote>
+<p><strong>⚠️ Important:</strong> When pre-rendering, your module as components are executed in a Node.js environment, where most Web APIs are not available. To account for this, wrap that code in a check like <code>if (typeof window !== 'undefined')</code>.</p>
+</blockquote>
+<h2 id="multiple-urls-and-custom-data">Multiple URLs and custom data</h2>
+<p>Out of the box only the homepage is pre-rendered. In order to pre-render additional URLs (routes), you'll want to add a <code>prerender-urls.json</code> file to your project. This file can also pass additional data as props to the <code>&lt;App /&gt;</code> component for each URL.</p>
+<pre><code class="language-json"><div>[
+  {
+    <span class="hljs-attr">"url"</span>: <span class="hljs-string">"/"</span>, // required
+    <span class="hljs-attr">"title"</span>: <span class="hljs-string">"All About Dogs"</span>,
+    <span class="hljs-attr">"breeds"</span>: [<span class="hljs-string">"Shiba"</span>, <span class="hljs-string">"Golden"</span>, <span class="hljs-string">"Husky"</span>]
+  },
+  {
+    <span class="hljs-attr">"url"</span>: <span class="hljs-string">"/breeds/shiba"</span>, // required
+    <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Shibas!"</span>,
+    <span class="hljs-attr">"photo"</span>: <span class="hljs-string">"/assets/shiba.jpg"</span>
+  }
+]
+</div></code></pre>
+<h3 id="dynamic-pre-rendering">Dynamic pre-rendering</h3>
+<p>In addition to the <code>prerender-urls.json</code>, it's also possible to export the same information from a JavaScript file. This file will be executed by Preact CLI, and it can export a function that returns the prerender configuration.</p>
+<p>To use dynamic pre-rendering configuration, you'll need to specify the JavaScript filename to Preact CLI:</p>
+<p><code>preact build --prerenderUrls ./prerender-urls.js</code></p>
+<p>The <code>prerender-urls.js</code> version of our prerender data looks like this:</p>
+<pre><code class="language-js"><div><span class="hljs-keyword">const</span> breeds = [<span class="hljs-string">"Shiba"</span>, <span class="hljs-string">"Golden"</span>, <span class="hljs-string">"Husky"</span>];
+
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">return</span> [
+    {
+      <span class="hljs-attr">url</span>: <span class="hljs-string">"/"</span>,
+      <span class="hljs-attr">title</span>: <span class="hljs-string">"All About Dogs"</span>,
+      breeds
+    },
+    {
+      <span class="hljs-attr">url</span>: <span class="hljs-string">"/breeds/shiba"</span>,
+      <span class="hljs-attr">title</span>: <span class="hljs-string">"Shibas!"</span>,
+      <span class="hljs-attr">photo</span>: <span class="hljs-string">"/assets/shiba.jpg"</span>,
+      breeds
+    }
+  ];
+};
+</div></code></pre>
+<h3 id="using-an-external-data-source">Using an external data source</h3>
+<p>You can use Preact CLI's custom pre-rendering to integrate with an external data source like a CMS. In order to fetch pages from a CMS and generate static pre-rendered URLs for each, we can export an async function from our <code>prerender-urls.js</code> file:</p>
+<pre><code class="language-js"><div><span class="hljs-built_in">module</span>.exports = <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> fetch(<span class="hljs-string">'https://cms.example.com/pages/'</span>);
+  <span class="hljs-keyword">const</span> pages = <span class="hljs-keyword">await</span> response.json();
+  <span class="hljs-keyword">return</span> pages.map(<span class="hljs-function"><span class="hljs-params">page</span> =&gt;</span> ({
+    <span class="hljs-attr">url</span>: page.url,
+    <span class="hljs-attr">title</span>: page.title,
+    <span class="hljs-attr">meta</span>: page.meta,
+    <span class="hljs-attr">data</span>: page.data
+  }));
+};
+</div></code></pre>
+<h2 id="consuming-pre-render-data">Consuming pre-render data</h2>
+<p>All pre-rendered pages include an inline script containing the pre-rendered data:</p>
+<pre><code class="language-html"><div><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"__PREACT_CLI_DATA__"</span>&gt;</span><span class="actionscript">{
+  <span class="hljs-string">"preRenderData"</span>: {
+    <span class="hljs-string">"url"</span>: <span class="hljs-string">"/"</span>,
+    <span class="hljs-string">"photo"</span>: <span class="hljs-string">"/assets/shiba.jpg"</span>
+  }
+}</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</div></code></pre>
+<p>You can access this in your code in order to &quot;rehydrate&quot; based on the pre-rendered data. This is particularly useful when using state management solutions like Redux or GraphQL. The JSON data will always contain a <code>&quot;url&quot;</code> key, which is useful for ensuring it's only used when hydrating the pre-rendered route.</p>
+<blockquote>
+<p><strong>💡 Tip:</strong> When a visitor first navigates to your app, the markup will contain only pre-rendered data for that specific page to avoid unnecessary download size. When they navigate to another route via client-side navigation, there won't be inlined pre-render data for that page. To get the data, make a request to <code>/&lt;new-route&gt;/preact_prerender_data.json</code> to get the data that route. Preact CLI enables this by generating a <code>preact_prerender_data.json</code> file next to each pre-rendered page at build time.</p>
+</blockquote>
+<h3 id="using-preactprerender-data-provider">Using <code>@preact/prerender-data-provider</code></h3>
+<p>To simplify usage of pre-render data in Preact CLI, we've created a wrapper library that does hydration and data fetching for you. It finds and parses the pre-rendered data from the inline script tag when rendered on a page with the matching URL, or fetches pre-render data if there's no inlined version when navigating on the client.</p>
+<p>To get started, install the library from npm:</p>
+<p><code>npm i -D @preact/prerender-data-provider</code></p>
+<p>Now that you have the library, import and use it in your App component (<code>components/app.js</code>):</p>
+<pre><code class="language-jsx"><div><span class="hljs-keyword">import</span> { Provider } <span class="hljs-keyword">from</span> <span class="hljs-string">'@preact/prerender-data-provider'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">App</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+  <span class="hljs-comment">// ...</span>
+  render(props) {
+    <span class="hljs-keyword">return</span> (
+      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Provider</span> <span class="hljs-attr">value</span>=<span class="hljs-string">{props}</span>&gt;</span>
+        // rest of your app here!
+      <span class="hljs-tag">&lt;/<span class="hljs-name">Provider</span>&gt;</span></span>
+    )
+  }
+}
+</div></code></pre>
+<p>Now your route components can use <code>prerender-data-provider</code> to access pre-render data:</p>
+<pre><code class="language-jsx"><div><span class="hljs-keyword">import</span> { usePrerenderData } <span class="hljs-keyword">from</span> <span class="hljs-string">'@preact/prerender-data-provider'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyRoute</span>(<span class="hljs-params">props</span>) </span>{
+
+  <span class="hljs-comment">// You can disable auto fetching performed by this hook in the</span>
+  <span class="hljs-comment">// following way: usePrerenderData(props, false);</span>
+  <span class="hljs-keyword">const</span> [data, loading, error] = usePrerenderData(props);
+
+  <span class="hljs-keyword">if</span> (loading) <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Loading...<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span>;
+
+  <span class="hljs-keyword">if</span> (error) <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Error: {error}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span>;
+
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+      // use data here
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+  );
+}
+</div></code></pre>
+<p>Passing <code>false</code> as a second parameter to <code>usePrerenderData</code> will disable dynamic fetching of <code>preact_prerender_data.json</code>. In addition to the hook shown above, a <code>&lt;PrerenderData&gt;</code> variant is available with the same signature as the hook.</p>
+
+    </body>
+    </html>

@@ -6,16 +6,16 @@ description: 'Документация Preact CLI'
 
 # Уходим в оффлайн вместе с Preact CLI
 
-Preact CLI включает в себя [workbox](https://developers.google.com/web/tools/workbox), использующий плагин [InjectManifest](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin#injectmanifest_plugin_2) для гибкой настройки service worker.
+Preact CLI включает в себя [workbox](https://developers.google.com/web/tools/workbox), использующий плагин [InjectManifest](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin#injectmanifest_plugin_2) для гибкой настройки сервис воркера.
 
 > **Примечание:** Preact CLI обрабатывает запросы при помощи стратегии [Network first](https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook#network-falling-back-to-cache), при которой пользователи будут получать свежий контент до момента перехода в оффлайн.
 
 ## Пользовательский функционал
 
-Чтобы внести изменения в базовый функционал service worker:
+Чтобы внести изменения в базовый функционал сервис воркера необходимо:
 
-- Создайте файл `sw.js` в каталоге `src`.
-- Вставьте следующий фрагмент кода чтобы повторить базовый функционал:
+- Создать файл `sw.js` в каталоге `src`.
+- Вставить следующий фрагмент кода с базовым функционалом:
 
 ```js
 self.__precacheManifest = [].concat(self.__precacheManifest || []);
@@ -23,18 +23,18 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 const isNav = event => event.request.mode === 'navigate';
 
 /**
- * Adding this before `precacheAndRoute` lets us handle all
- * the navigation requests even if they are in precache.
+ * Добавление данного кода перед `precacheAndRoute`
+ * позволяет отлавливать переходы даже если они находятся в прекэше
  */
 workbox.routing.registerRoute(
   ({ event }) => isNav(event),
   new workbox.strategies.NetworkFirst({
-    // this cache is plunged with every new service worker deploy so we dont need to care about purging the cache.
+    // кэш сбрасывается при каждом деплое сервис воркера, так что нет необходимости в его очистке
     cacheName: workbox.core.cacheNames.precache,
-    networkTimeoutSeconds: 5, // if u dont start getting headers within 5 sec fallback to cache.
+    networkTimeoutSeconds: 5, // если мы не получили заголовки за 5 секунд - отдаём кэш
     plugins: [
       new workbox.cacheableResponse.Plugin({
-        statuses: [200], // only cache valid responses, not opaque responses e.g. wifi portal.
+        statuses: [200], // кэшируем только валидные ответы
       }),
     ],
   })
@@ -49,14 +49,14 @@ workbox.routing.setCatchHandler(({ event }) => {
 });
 ```
 
-- Внесите необходимые изменения
+- Внести необходимые изменения
 
 ## Кэширование других роутов
 
 Если Вы хотите кэшировать другие роуты или вызовы API, необходимо сделать следующее: 
 
-- Создайте файл `sw.js` в каталоге `src`.
-- Добавьте следующий код с необходимыми настройками:
+- Создать файл `sw.js` в каталоге `src`.
+- Добавить следующий код с необходимыми настройками:
 
 ```js
 workbox.routing.registerRoute(
@@ -69,13 +69,13 @@ workbox.routing.registerRoute(
 
 - Вы можете настроить этот сниппет на использование стратегии `networkOnly` чтобы убедиться, что `/special/url` никогда не будет закэширован.
 
-> **Примечание:** Любой пользовательский код по управлению роутами должен быть помещён перед `workbox.precaching.precacheAndRoute(self.__precacheManifest, precacheOptions);`
+> **Примечание:** любой пользовательский код по управлению роутами должен быть помещён перед `workbox.precaching.precacheAndRoute(self.__precacheManifest, precacheOptions);`
 
 ## Использование других модулей из workbox
 
-Preact CLI подключает [worbox-sw](https://developers.google.com/web/tools/workbox/modules/workbox-sw) в своём service worker, что позволяет импортировать из него любые модули.
+Preact CLI подключает [worbox-sw](https://developers.google.com/web/tools/workbox/modules/workbox-sw) в своём сервис воркере, что позволяет импортировать из него любые модули.
 
-**Например, фоновоя синхронизация:**
+**Например, фоновая синхронизация:**
 
 Добавьте следующий код в конец файла `sw.js`:
 
